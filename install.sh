@@ -10,7 +10,8 @@ cd yaml-0.1.4
 make
 make install
 
-cd ..
+# clean up yaml sources
+cd $OPENSHIFT_TMP_DIR
 rm -rf yaml*
 
 # get ruby
@@ -27,7 +28,7 @@ export LIBYAMLPATH=$OPENSHIFT_RUNTIME_DIR/lib
 cd ext/psych
 sed -i '1i $LIBPATH << ENV["LIBYAMLPATH"]' extconf.rb
 
-cd ../..
+cd $OPENSHIFT_TMP_DIR
 
 # compile ruby
 ./configure --prefix=$OPENSHIFT_RUNTIME_DIR
@@ -35,6 +36,9 @@ make
 make install
 
 export PATH=$OPENSHIFT_RUNTIME_DIR/bin:$PATH
+
+# clean up ruby sources
+cd $OPENSHIFT_TMP_DIR
 rm -rf ruby*
 
 # install rails

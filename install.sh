@@ -32,7 +32,7 @@ cd $OPENSHIFT_TMP_DIR
 cd ruby-1.9.3-p194
 
 # compile ruby
-./configure --prefix=$OPENSHIFT_RUNTIME_DIR
+./configure --disable-install-doc --prefix=$OPENSHIFT_RUNTIME_DIR
 make
 make install
 

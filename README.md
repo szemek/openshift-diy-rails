@@ -11,7 +11,7 @@ Installation
 2.  Log into a remote machine (check [instruction](https://developers.openshift.com/en/managing-remote-connection.html))
 3.  Execute  
 `cd $OPENSHIFT_TMP_DIR`  
-`wget https://raw.github.com/szemek/openshift-diy-rails/master/install.sh`  
+`wget https://raw.githubusercontent.com/szemek/openshift-diy-rails/master/install.sh`  
 `chmod u+x install.sh`  
 `./install.sh`
 4.  Wait until installation is finished. It should take circa 15-20 minutes.

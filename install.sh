@@ -1,47 +1,18 @@
 #!/bin/sh
 
-cd $OPENSHIFT_TMP_DIR
+export OPENSHIFT_RUNTIME_DIR=$OPENSHIFT_HOMEDIR/app-root/runtime
+cd $OPENSHIFT_RUNTIME_DIR
 
-# get & compile yaml
-wget http://pyyaml.org/download/libyaml/yaml-0.1.4.tar.gz
-tar xzf yaml-0.1.4.tar.gz
-cd yaml-0.1.4
-./configure --prefix=$OPENSHIFT_RUNTIME_DIR
-make
-make install
+# get rbenv & ruby-build
+git clone https://github.com/sstephenson/rbenv.git
+export RBENV_ROOT=$OPENSHIFT_RUNTIME_DIR/rbenv
+export PATH=$PATH:$RBENV_ROOT/bin
+eval "$(rbenv init -)"
+git clone https://github.com/sstephenson/ruby-build.git $RBENV_ROOT/plugins/ruby-build
 
-# clean up yaml sources
-cd $OPENSHIFT_TMP_DIR
-rm -rf yaml*
-
-# get ruby
-wget http://ftp.ruby-lang.org/pub/ruby/1.9/ruby-1.9.3-p194.tar.gz
-tar xzf ruby-1.9.3-p194.tar.gz
-cd ruby-1.9.3-p194
-
-# export directory with yaml.h
-export C_INCLUDE_PATH=$OPENSHIFT_RUNTIME_DIR/include
-
-# export directory with libyaml
-export LIBYAMLPATH=$OPENSHIFT_RUNTIME_DIR/lib
-
-cd ext/psych
-sed -i '1i $LIBPATH << ENV["LIBYAMLPATH"]' extconf.rb
-
-cd $OPENSHIFT_TMP_DIR
-cd ruby-1.9.3-p194
-
-# compile ruby
-./configure --disable-install-doc --prefix=$OPENSHIFT_RUNTIME_DIR
-make
-make install
-
-export PATH=$OPENSHIFT_RUNTIME_DIR/bin:$PATH
-
-# clean up ruby sources
-cd $OPENSHIFT_TMP_DIR
-rm -rf ruby*
+# install ruby
+rbenv install 2.2.2
+rbenv shell 2.2.2
 
 # install rails
-gem install rails --no-ri --no-rdoc
-
+gem install rails --no-ri --no-rdoc --verbose

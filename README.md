@@ -8,7 +8,7 @@ Installation
 -------------------
 
 1.  [Create Do-It-Yourself application](https://openshift.redhat.com/app/console/application_types)
-2.  Log into a remote machine (check [instruction](https://openshift.redhat.com/community/developers/remote-access))
+2.  Log into a remote machine (check [instruction](https://developers.openshift.com/en/managing-remote-connection.html))
 3.  Execute  
 `cd $OPENSHIFT_TMP_DIR`  
 `wget https://raw.github.com/szemek/openshift-diy-rails/master/install.sh`  

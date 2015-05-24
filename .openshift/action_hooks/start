@@ -11,4 +11,6 @@ export PATH=$PATH:$RBENV_ROOT/bin
 eval "$(rbenv init -)"
 rbenv shell 2.2.2
 
+bundle check || bundle install
+
 rails server -b $OPENSHIFT_INTERNAL_IP -p $OPENSHIFT_INTERNAL_PORT -d

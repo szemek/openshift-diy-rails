@@ -5,4 +5,10 @@
 export OPENSHIFT_RUNTIME_DIR=$OPENSHIFT_HOMEDIR/app-root/runtime
 export PATH=$OPENSHIFT_RUNTIME_DIR/bin:$PATH
 cd $OPENSHIFT_REPO_DIR
+
+export RBENV_ROOT=$OPENSHIFT_RUNTIME_DIR/rbenv
+export PATH=$PATH:$RBENV_ROOT/bin
+eval "$(rbenv init -)"
+rbenv shell 2.2.2
+
 rails server -b $OPENSHIFT_INTERNAL_IP -p $OPENSHIFT_INTERNAL_PORT -d
